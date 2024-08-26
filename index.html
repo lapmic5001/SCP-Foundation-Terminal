@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: black;
+        color: lawngreen;
+        text-align: center;
+        align-content: center;
+      }
+      textarea {
+        border-color: lawngreen;
+        background-color: black;
+        color: lawngreen;
+      }
+      button {
+        border-color: lawngreen;
+        background-color: black;
+        color: lawngreen;
+      }
+      .press-start-2p-regular {
+        font-family: 'Press Start 2P', system-ui;
+        font-weight: 400;
+        font-style: normal;
+      }
+      ::placeholder {
+        color: lawngreen;
+        opacity: 1; /* Firefox */
+      }
+      #titleMARKER {
+        top: 20%;
+      }
+      #submitButton {
+        top: 60%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="titleMARKER" class="press-start-2p-regular">Input Credentials</h1>
+    <textarea
+      class="press-start-2p-regular"
+      id="username"
+      placeholder="Username"
+    ></textarea>
+    <textarea
+      class="press-start-2p-regular"
+      id="password"
+      placeholder="Password"
+    ></textarea>
+    <button
+      class="press-start-2p-regular"
+      id="submitButton"
+      onclick="checkCreds()"
+    >
+      Submit Credentials
+    </button>
+    <script>
+      function checkCreds() {
+        let uInput = document.getElementById('username').value;
+        let pInput = document.getElementById('password').value;
+        let displayPanel = document.getElementById('displayPanel');
+
+        // Define the correct username and password
+        const correctCredentials = {
+          drchrome: 'rgb-spectrum',
+          'fun-guy': 'hewo',
+          mOaR: '40958',
+        };
+
+        // Split the input by commas and trim whitespace
+        const usernames = uInput.split(',').map((user) => user.trim());
+        const passwords = pInput.split(',').map((pass) => pass.trim());
+
+        // Check if the input matches any of the correct username and password pairs
+        let isValid = false;
+        for (let i = 0; i < usernames.length; i++) {
+          if (correctCredentials[usernames[i]] === passwords[i]) {
+            isValid = true;
+            // Redirect based on the username
+            const actions = {
+              drchrome: () => {
+                window.location.replace('assets/pages/chrome/chrome-home.html');
+              },
+              'fun-guy': () => {
+                window.location.replace('https://example.com/fun-guy');
+              },
+              mOaR: () => {
+                window.location.replace('https://example.com/mOaR');
+              },
+            };
+            actions[usernames[i]]();
+            break; // Exit loop after successful match
+          }
+        }
+
+        if (!isValid) {
+          titleMARKER.style.color = 'red';
+          titleMARKER.innerText = 'Incorrect username or password';
+        }
+      }
+    </script>
+  </body>
+</html>
