@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: black;
+        color: lawngreen;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        height: 100vh;
+        margin: 0;
+        padding: 20px;
+      }
+      .desktop {
+        display: flex;
+        flex-wrap: wrap; /* Allows icons to wrap to the next line */
+      }
+      .folder-container {
+        display: flex;
+        flex-direction: column; /* Aligns icon and description vertically */
+        align-items: center; /* Centers the content */
+        margin: 10px;
+      }
+      .folder-icon {
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .folder-icon:hover {
+        transform: scale(1.1);
+      }
+      .folder-description {
+        margin-top: 5px; /* Adds space between icon and description */
+        font-family: 'Press Start 2P', system-ui;
+        font-weight: 400;
+        font-style: normal;
+        text-align: center; /* Centers the description text */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="desktop">
+      <div class="folder-container">
+        <a href="chrome-pics-home.html">
+          <img
+            src="../../images/textfileicon.png"
+            class="folder-icon"
+            alt="Text File Icon 1"
+          />
+        </a>
+        <div class="folder-description">10-7-95.txt</div>
+      </div>
+      <div class="folder-container">
+        <a href="chrome-journal-home.html">
+          <img
+            src="../../images/textfileicon.png"
+            class="folder-icon"
+            alt="Text File Icon 2"
+          />
+        </a>
+        <div class="folder-description">Journal</div>
+      </div>
+      <div class="folder-container">
+        <a href="chrome-tunes-home.html">
+          <img
+            src="../../images/textfileicon.png"
+            class="folder-icon"
+            alt="Text File Icon 3"
+          />
+        </a>
+        <div class="folder-description">Tunes</div>
+      </div>
+    </div>
+    <script></script>
+  </body>
+</html>
