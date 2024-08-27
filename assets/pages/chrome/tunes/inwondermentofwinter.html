@@ -45,7 +45,6 @@
             background-size: cover;
             cursor: pointer;
             margin: 0 5px;
-            /* Added placeholder background color for debugging */
             background-color: #0cfc00; 
         }
         #volumeSlider {
@@ -143,7 +142,7 @@
             isPlaying = !isPlaying;
             document.getElementById('playPauseButton').style.backgroundImage = isPlaying ? 'url(../../../images/pause-button.png)' : 'url(../../../images/play-button.png)';
             if (isPlaying) {
-                audio.play();
+                audio.play().catch(err => console.error('Error playing audio:', err));
             } else {
                 audio.pause();
             }
@@ -156,15 +155,18 @@
 
         // Seek track
         function seekTrack(value) {
-            const seekTime = (value / 100) * audio.duration;
-            audio.currentTime = seekTime;
+            if (audio.duration) {
+                const seekTime = (value / 100) * audio.duration;
+                audio.currentTime = seekTime;
+            }
         }
 
         // Update progress slider
         function updateProgress() {
-            if (!audio.duration) return;
-            const progress = (audio.currentTime / audio.duration) * 100;
-            progressSlider.value = progress;
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressSlider.value = progress;
+            }
         }
 
         // Visualizer animation
@@ -190,6 +192,14 @@
 
         // Update progress slider periodically
         audio.addEventListener('timeupdate', updateProgress);
+
+        // Handle audio errors
+        audio.addEventListener('error', (e) => {
+            console.error('Audio error:', e);
+        });
+
+        // Initialize volume
+        changeVolume(volumeSlider.value);
     </script>
 </body>
 <!--OpenAI. (2024). ChatGPT (4o mini) [Large language model]. https://chatgpt.com/-->
