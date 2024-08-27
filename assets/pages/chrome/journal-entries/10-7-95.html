@@ -5,78 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>80s Text Reader</title>
     <style>
-        /* Global Styles */
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #000;
-            color: #00FF00; /* Neon green color */
-        }
-
-        /* Container */
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            padding: 20px;
-        }
-
-        /* Text Reader */
-        .text-reader {
-            border: 2px solid #00FF00; /* Neon green border */
-            padding: 20px;
-            background-color: #000;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
-            width: 80%;
-            max-width: 600px;
-        }
-
-        /* Title */
-        .title {
-            font-size: 2em;
-            margin: 0 0 20px 0;
-            text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
-        }
-
-        /* Content */
-        .content {
-            font-size: 1.2em;
-            line-height: 1.5;
-            white-space: pre-wrap; /* Preserve whitespace */
-        }
-
-        /* Back Button */
-        .back-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            text-decoration: none;
-            color: #000;
-            background-color: #00FF00;
-            border: 2px solid #00FF00;
-            border-radius: 5px;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .back-button:hover {
-            background-color: #00CC00;
-            color: #000;
-        }
+        background-color: black;
+        color: lawngreen;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        height: 100vh;
+        margin: 0;
+        padding: 20px;
+      }
+      .desktop {
+        display: flex;
+        flex-wrap: wrap; /* Allows icons to wrap to the next line */
+      }
+      .folder-container {
+        display: flex;
+        flex-direction: column; /* Aligns icon and description vertically */
+        align-items: center; /* Centers the content */
+        margin: 10px;
+      }
+      .folder-icon {
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .folder-icon:hover {
+        transform: scale(1.1);
+      }
+      .folder-description {
+        margin-top: 5px; /* Adds space between icon and description */
+        font-family: 'Press Start 2P', system-ui;
+        font-weight: 400;
+        font-style: normal;
+        text-align: center; /* Centers the description text */
+      }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="text-reader">
-            <h1 class="title">Welcome to the 80's Text Reader</h1>
+            <h1 class="title">File Recovered; Dated 10.7.1995</h1>
             <p class="content">
-                This is a sample text that represents what you might find in an 80's computer terminal. It’s all about retro vibes, neon colors, and monospaced fonts. Enjoy the throwback to a classic era of computing!
+                Welp an average day what am I supposed to say to these things now I can’t remember but this new journal issue by the oh-fives it’s kind of stupid to be honest but guess it’s what I have to do. 
+
+                I guess today I walked around the side a lot kind of a slow day at the office. I’ve big happen no stupid breaches or any of that stuff you know, but I met with Rose. We chatted for a few hours. 
+                
+                I went to SCP 076 cell and I did a little inspection and make sure wasn’t gonna escape or anything can’t have able murdering all our staff so that was fun. Took a little field trip.
+                
+                I had dinner at the canteen like usual nothing special to be honest but with baked beans and turkey sliders so that was pretty good for what the usual food is so I’m not complaining and guess I’ll check in tomorrow!                
             </p>
-            <a href="#" class="back-button">Back</a>
+            <a href="../chrome-journal-home.html" class="back-button">Back</a>
         </div>
     </div>
 </body>
