@@ -31,19 +31,22 @@
         #heading h1, #heading h2, #heading h3 {
             margin: 5px 0;
         }
-        #controls {
+        #controlsWrapper {
             display: flex;
             align-items: center;
+            justify-content: center;
             margin-bottom: 20px;
         }
-        #controls button {
+        #controlsWrapper button {
             background-color: #0cfc00;
-            border: none;
+            border: 2px solid #0cfc00; /* Added border for visibility */
             width: 40px;
             height: 40px;
             background-size: cover;
             cursor: pointer;
             margin: 0 5px;
+            /* Added placeholder background color for debugging */
+            background-color: #0cfc00; 
         }
         #volumeSlider {
             width: 200px;
@@ -82,15 +85,6 @@
             position: absolute;
             bottom: 0;
             left: 0;
-        }
-        #controlsWrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-        #controlsWrapper button {
-            margin-right: 10px;
         }
     </style>
 </head>
@@ -198,4 +192,5 @@
         audio.addEventListener('timeupdate', updateProgress);
     </script>
 </body>
+<!--OpenAI. (2024). ChatGPT (4o mini) [Large language model]. https://chatgpt.com/-->
 </html>
