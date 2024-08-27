@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>80s Text Reader</title>
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #000;
+            color: #00FF00; /* Neon green color */
+        }
+
+        /* Container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        /* Text Reader */
+        .text-reader {
+            border: 2px solid #00FF00; /* Neon green border */
+            padding: 20px;
+            background-color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        /* Title */
+        .title {
+            font-size: 2em;
+            margin: 0 0 20px 0;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+        }
+
+        /* Content */
+        .content {
+            font-size: 1.2em;
+            line-height: 1.5;
+            white-space: pre-wrap; /* Preserve whitespace */
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            text-decoration: none;
+            color: #000;
+            background-color: #00FF00;
+            border: 2px solid #00FF00;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #00CC00;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-reader">
+            <h1 class="title">Welcome to the 80's Text Reader</h1>
+            <p class="content">
+                This is a sample text that represents what you might find in an 80's computer terminal. It’s all about retro vibes, neon colors, and monospaced fonts. Enjoy the throwback to a classic era of computing!
+            </p>
+            <a href="#" class="back-button">Back</a>
+        </div>
+    </div>
+</body>
+</html>

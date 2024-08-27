@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faux OS Audiovisualizer</title>
+    <style>
+        body {
+            background-color: black;
+            color: #0cfc00;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        #controls {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #0cfc00;
+            border: none;
+            width: 40px;
+            height: 40px;
+            background-size: cover;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        #volumeSlider, #progressSlider {
+            width: 200px;
+            margin: 10px 0;
+        }
+        #visualizer {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 200px;
+            margin: 20px 0;
+        }
+        .bar {
+            width: 10px;
+            background-color: #0cfc00;
+            margin: 0 2px;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <button id="backButton" style="background-image: url('back-icon.png');"></button>
+        <button id="loopButton" style="background-image: url('loop-off.png');" onclick="toggleLoop()"></button>
+        <button id="playPauseButton" style="background-image: url('play.png');" onclick="togglePlayPause()"></button>
+        <input type="range" id="volumeSlider" min="0" max="100" value="100" oninput="changeVolume(this.value)">
+        <input type="range" id="progressSlider" min="0" max="100" value="0" step="1" oninput="seekTrack(this.value)">
+    </div>
+
+    <div id="visualizer"></div>
+
+    <audio id="audioElement" src="your-audio-file.mp3" preload="auto"></audio>
+
+    <script>
+        // Initialization
+        const audio = document.getElementById('audioElement');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const progressSlider = document.getElementById('progressSlider');
+        const visualizer = document.getElementById('visualizer');
+
+        // Create bars for the visualizer
+        const numBars = 50;
+        const bars = [];
+        for (let i = 0; i < numBars; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            visualizer.appendChild(bar);
+            bars.push(bar);
+        }
+
+        // Toggle loop button
+        let loopEnabled = false;
+        function toggleLoop() {
+            loopEnabled = !loopEnabled;
+            document.getElementById('loopButton').style.backgroundImage = loopEnabled ? 'url(loop-on.png)' : 'url(loop-off.png)';
+            audio.loop = loopEnabled;
+        }
+
+        // Toggle play/pause button
+        let isPlaying = false;
+        function togglePlayPause() {
+            isPlaying = !isPlaying;
+            document.getElementById('playPauseButton').style.backgroundImage = isPlaying ? 'url(pause.png)' : 'url(play.png)';
+            if (isPlaying) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        // Volume control
+        function changeVolume(value) {
+            audio.volume = value / 100;
+        }
+
+        // Seek track
+        function seekTrack(value) {
+            const seekTime = (value / 100) * audio.duration;
+            audio.currentTime = seekTime;
+        }
+
+        // Update progress slider
+        function updateProgress() {
+            if (!audio.duration) return;
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressSlider.value = progress;
+        }
+
+        // Visualizer animation
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const analyser = audioContext.createAnalyser();
+        const source = audioContext.createMediaElementSource(audio);
+        source.connect(analyser);
+        analyser.connect(audioContext.destination);
+
+        analyser.fftSize = 256;
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        function animateVisualizer() {
+            requestAnimationFrame(animateVisualizer);
+            analyser.getByteFrequencyData(dataArray);
+            for (let i = 0; i < numBars; i++) {
+                const barHeight = dataArray[i] / 2; // Scale to fit bar height
+                bars[i].style.height = barHeight + 'px';
+            }
+        }
+        animateVisualizer();
+
+        // Update progress slider periodically
+        audio.addEventListener('timeupdate', updateProgress);
+    </script>
+</body>
+</html>
