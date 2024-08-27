@@ -33,7 +33,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            height: 200px;
+            height: 100vh;
             margin: 20px 0;
         }
         .bar {
@@ -86,7 +86,7 @@
         let isPlaying = false;
         function togglePlayPause() {
             isPlaying = !isPlaying;
-            document.getElementById('playPauseButton').style.backgroundImage = isPlaying ? 'url(../../../images/pause-button.png)' : 'url(../../../images/play-button.png)';
+            document.getElementById('playPauseButton').style.backgroundImage = isPlaying ? 'url(../../../images/play-button.png)' : 'url(../../../images/pause-button.png)';
             if (isPlaying) {
                 audio.play();
             } else {
