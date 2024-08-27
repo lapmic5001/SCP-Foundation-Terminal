@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="slider-styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <title>SCP_CLASSIFIED_AUDIOFILE</title>
     <style>
         body {
@@ -26,36 +23,42 @@
             height: 100vh;
             text-align: center;
         }
+
         #heading {
             margin-bottom: 20px;
         }
+
         #heading h1, #heading h2, #heading h3 {
             margin: 5px 0;
         }
+
         #controlsWrapper {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
         }
+
         #controlsWrapper button {
             background-color: #0cfc00;
-            border: 2px solid #0cfc00; /* Added border for visibility */
+            border: 2px solid #0cfc00;
             width: 40px;
             height: 40px;
             background-size: cover;
             cursor: pointer;
             margin: 0 5px;
-            background-color: #0cfc00; 
         }
+
         #volumeSlider {
             width: 200px;
             margin: 0 10px;
         }
+
         #progressSlider {
             width: 100%;
-            margin: 10px 0;
+            margin: 20px 0; /* Moved down to avoid overlap */
         }
+
         #visualizer {
             display: flex;
             justify-content: center;
@@ -64,27 +67,117 @@
             margin: 20px 0;
             width: 100%;
         }
+
         .bar {
             width: 10px;
             background-color: #0cfc00;
             margin: 0 2px;
             height: 0;
         }
+
         #progressContainer {
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
+
         #progressWrapper {
             width: 100%;
             max-width: 600px;
             position: relative;
         }
-        #progressSlider {
-            position: absolute;
-            bottom: 0;
-            left: 0;
+
+        .slider-container {
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            margin: 10px;
+            width: 100%;
+            height: 15px;
+            background: #0cfc00;
+            outline: none;
+            border-radius: 0;
+            opacity: 0.7;
+            transition: opacity .15s ease-in-out;
+        }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #0cfc00;
+            cursor: pointer;
+            border-radius: 0;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            background: #45a049;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: #0cfc00;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .slider::-moz-range-thumb:hover {
+            background: #45a049;
+        }
+
+        .slider::-ms-thumb {
+            width: 25px;
+            height: 25px;
+            background: #0cfc00;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .slider::-ms-thumb:hover {
+            background: #45a049;
+        }
+
+        .slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 15px;
+            background: #000;
+            border-radius: 5px;
+        }
+
+        .slider::-moz-range-track {
+            width: 100%;
+            height: 15px;
+            background: #000;
+            border-radius: 5px;
+        }
+
+        .slider::-ms-track {
+            width: 100%;
+            height: 15px;
+            background: transparent;
+            border-color: transparent;
+            color: transparent;
+        }
+
+        .slider::-ms-fill-lower {
+            background: #000;
+            border-radius: 5px;
+        }
+
+        .slider::-ms-fill-upper {
+            background: #000;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -94,9 +187,11 @@
         <h2>Gareth Coker</h2>
         <h3 title="2020">Release Year Unknown</h3>
     </div>
-    
+
     <div id="controlsWrapper">
-        <a href="../chrome-tunes-home.html"><button id="backButton" style="background-image: url('../../../images/back-button-sprite-pixilart.png');"></button></a>
+        <a href="../chrome-tunes-home.html">
+            <button id="backButton" style="background-image: url('../../../images/back-button-sprite-pixilart.png');"></button>
+        </a>
         <button id="loopButton" style="background-image: url('../../../images/loop-button-OFF.png');" onclick="toggleLoop()"></button>
         <button id="playPauseButton" style="background-image: url('../../../images/play-button.png');" onclick="togglePlayPause()"></button>
         <input type="range" id="volumeSlider" min="0" max="100" value="100" oninput="changeVolume(this.value)" class="slider">
@@ -133,7 +228,9 @@
         let loopEnabled = false;
         function toggleLoop() {
             loopEnabled = !loopEnabled;
-            document.getElementById('loopButton').style.backgroundImage = loopEnabled ? 'url(../../../images/loop-button-ON.png)' : 'url(../../../images/loop-button-OFF.png)';
+            document.getElementById('loopButton').style.backgroundImage = loopEnabled
+                ? 'url(../../../images/loop-button-ON.png)'
+                : 'url(../../../images/loop-button-OFF.png)';
             audio.loop = loopEnabled;
         }
 
@@ -141,7 +238,9 @@
         let isPlaying = false;
         function togglePlayPause() {
             isPlaying = !isPlaying;
-            document.getElementById('playPauseButton').style.backgroundImage = isPlaying ? 'url(../../../images/pause-button.png)' : 'url(../../../images/play-button.png)';
+            document.getElementById('playPauseButton').style.backgroundImage = isPlaying
+                ? 'url(../../../images/pause-button.png)'
+                : 'url(../../../images/play-button.png)';
             if (isPlaying) {
                 audio.play().catch(err => console.error('Error playing audio:', err));
             } else {
@@ -199,9 +298,4 @@
             console.error('Audio error:', e);
         });
 
-        // Initialize volume
-        changeVolume(volumeSlider.value);
-    </script>
-</body>
-<!--OpenAI. (2024). ChatGPT (4o mini) [Large language model]. https://chatgpt.com/-->
-</html>
+       
