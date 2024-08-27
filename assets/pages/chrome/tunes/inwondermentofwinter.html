@@ -46,9 +46,9 @@
 </head>
 <body>
     <div id="controls">
-        <button id="backButton" style="background-image: url('back-icon.png');"></button>
-        <button id="loopButton" style="background-image: url('../../../../images/loop-button-OFF.png');" onclick="toggleLoop()"></button>
-        <button id="playPauseButton" style="background-image: url('../../../../images/play-button.png');" onclick="togglePlayPause()"></button>
+        <button id="backButton" style="background-image: url('../../../images/backbuttonicon.png');"></button>
+        <button id="loopButton" style="background-image: url('../../../images/loop-button-OFF.png');" onclick="toggleLoop()"></button>
+        <button id="playPauseButton" style="background-image: url('../../../images/play-button.png');" onclick="togglePlayPause()"></button>
         <input type="range" id="volumeSlider" min="0" max="100" value="100" oninput="changeVolume(this.value)">
         <input type="range" id="progressSlider" min="0" max="100" value="0" step="1" oninput="seekTrack(this.value)">
     </div>
@@ -78,7 +78,7 @@
         let loopEnabled = false;
         function toggleLoop() {
             loopEnabled = !loopEnabled;
-            document.getElementById('loopButton').style.backgroundImage = loopEnabled ? 'url(../../../../images/loop-button-ON.png)' : 'url(../../../../images/loop-button-OFF.png)';
+            document.getElementById('loopButton').style.backgroundImage = loopEnabled ? 'url(../../../images/loop-button-ON.png)' : 'url(../../../images/loop-button-OFF.png)';
             audio.loop = loopEnabled;
         }
 
@@ -86,7 +86,7 @@
         let isPlaying = false;
         function togglePlayPause() {
             isPlaying = !isPlaying;
-            document.getElementById('playPauseButton').style.backgroundImage = isPlaying ? 'url(../../../../images/pause-button.png)' : 'url(../../../../images/play-button.png)';
+            document.getElementById('playPauseButton').style.backgroundImage = isPlaying ? 'url(../../../images/pause-button.png)' : 'url(../../../images/play-button.png)';
             if (isPlaying) {
                 audio.play();
             } else {
