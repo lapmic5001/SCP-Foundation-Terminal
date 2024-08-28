@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCP_CLASSIFIED_AUDIOFILE</title>
     <link rel="stylesheet" href="slider-styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <title>SCP_CLASSIFIED_AUDIOFILE</title>
     <style>
         body {
             background-color: black;
@@ -56,7 +56,7 @@
 
         #progressSlider {
             width: 100%;
-            margin: 20px 0; /* Moved down to avoid overlap */
+            margin: 20px 0;
         }
 
         #visualizer {
@@ -75,17 +75,11 @@
             height: 0;
         }
 
-        #progressContainer {
+        #progressWrapper {
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        #progressWrapper {
-            width: 100%;
-            max-width: 600px;
-            position: relative;
         }
 
         .slider-container {
@@ -297,5 +291,6 @@
         audio.addEventListener('error', (e) => {
             console.error('Audio error:', e);
         });
-
-       
+    </script>
+</body>
+</html>
