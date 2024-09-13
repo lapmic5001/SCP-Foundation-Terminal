@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCP_CLASSIFIED_AUDIOFILE</title>
+    <link rel="stylesheet" href="slider-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            color: #0cfc00;
+            font-family: 'Press Start 2P', system-ui;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        #heading {
+            margin-bottom: 20px;
+        }
+
+        #heading h1, #heading h2, #heading h3 {
+            margin: 5px 0;
+        }
+
+        #controlsWrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        #controlsWrapper button {
+            background-color: #0cfc00;
+            border: 2px solid #0cfc00;
+            width: 40px;
+            height: 40px;
+            background-size: cover;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+
+        #volumeSlider {
+            width: 200px;
+            margin: 0 10px;
+        }
+
+        #progressSlider {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        #visualizer {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 200px;
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        .bar {
+            width: 10px;
+            background-color: #0cfc00;
+            margin: 0 2px;
+            height: 0;
+        }
+
+        #progressWrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-container {
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            margin: 10px;
+            width: 100%;
+            height: 15px;
+            background: #0cfc00;
+            outline: none;
+            border-radius: 0;
+            opacity: 0.7;
+            transition: opacity .15s ease-in-out;
+        }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #0cfc00;
+            cursor: pointer;
+            border-radius: 0;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            background: #45a049;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: #0cfc00;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .slider::-moz-range-thumb:hover {
+            background: #45a049;
+        }
+
+        .slider::-ms-thumb {
+            width: 25px;
+            height: 25px;
+            background: #0cfc00;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .slider::-ms-thumb:hover {
+            background: #45a049;
+        }
+
+        .slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 15px;
+            background: #000;
+            border-radius: 5px;
+        }
+
+        .slider::-moz-range-track {
+            width: 100%;
+            height: 15px;
+            background: #000;
+            border-radius: 5px;
+        }
+
+        .slider::-ms-track {
+            width: 100%;
+            height: 15px;
+            background: transparent;
+            border-color: transparent;
+            color: transparent;
+        }
+
+        .slider::-ms-fill-lower {
+            background: #000;
+            border-radius: 5px;
+        }
+
+        .slider::-ms-fill-upper {
+            background: #000;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="heading">
+        <h1>Elegy for the Living</h1>
+        <h2>twinrova</h2>
+        <h3 title="wip">"WIP"</h3>
+    </div>
+
+    <div id="controlsWrapper">
+        <a href="../chrome-tunes-home.html">
+            <button id="backButton" style="background-image: url('../../../images/back-button-sprite-pixilart.png');"></button>
+        </a>
+        <button id="loopButton" style="background-image: url('../../../images/loop-button-OFF.png');" onclick="toggleLoop()"></button>
+        <button id="playPauseButton" style="background-image: url('../../../images/play-button.png');" onclick="togglePlayPause()"></button>
+        <input type="range" id="volumeSlider" min="0" max="100" value="100" oninput="changeVolume(this.value)" class="slider">
+    </div>
+
+    <div id="visualizer"></div>
+
+    <div id="progressWrapper">
+        <div class="slider-container">
+            <input type="range" id="progressSlider" min="0" max="100" value="0" step="1" oninput="seekTrack(this.value)" class="slider">
+        </div>
+    </div>
+
+    <audio id="audioElement" src="elegyfortheliving.mp3" preload="auto"></audio>
+
+    <script>
+        // Initialization
+        const audio = document.getElementById('audioElement');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const progressSlider = document.getElementById('progressSlider');
+        const visualizer = document.getElementById('visualizer');
+
+        // Create bars for the visualizer
+        const numBars = 50;
+        const bars = [];
+        for (let i = 0; i < numBars; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            visualizer.appendChild(bar);
+            bars.push(bar);
+        }
+
+        // Toggle loop button
+        let loopEnabled = false;
+        function toggleLoop() {
+            loopEnabled = !loopEnabled;
+            document.getElementById('loopButton').style.backgroundImage = loopEnabled
+                ? 'url(../../../images/loop-button-ON.png)'
+                : 'url(../../../images/loop-button-OFF.png)';
+            audio.loop = loopEnabled;
+        }
+
+        // Toggle play/pause button
+        let isPlaying = false;
+        function togglePlayPause() {
+            isPlaying = !isPlaying;
+            document.getElementById('playPauseButton').style.backgroundImage = isPlaying
+                ? 'url(../../../images/pause-button.png)'
+                : 'url(../../../images/play-button.png)';
+            if (isPlaying) {
+                audio.play().catch(err => console.error('Error playing audio:', err));
+            } else {
+                audio.pause();
+            }
+        }
+
+        // Volume control
+        function changeVolume(value) {
+            audio.volume = value / 100;
+        }
+
+        // Seek track
+        function seekTrack(value) {
+            if (audio.duration) {
+                const seekTime = (value / 100) * audio.duration;
+                audio.currentTime = seekTime;
+            }
+        }
+
+        // Update progress slider
+        function updateProgress() {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressSlider.value = progress;
+            }
+        }
+
+        // Visualizer animation
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const analyser = audioContext.createAnalyser();
+        const source = audioContext.createMediaElementSource(audio);
+        source.connect(analyser);
+        analyser.connect(audioContext.destination);
+
+        analyser.fftSize = 256;
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        function animateVisualizer() {
+            requestAnimationFrame(animateVisualizer);
+            analyser.getByteFrequencyData(dataArray);
+            for (let i = 0; i < numBars; i++) {
+                const barHeight = dataArray[i] / 2; // Scale to fit bar height
+                bars[i].style.height = barHeight + 'px';
+            }
+        }
+        animateVisualizer();
+
+        // Update progress slider periodically
+        audio.addEventListener('timeupdate', updateProgress);
+
+        // Handle audio errors
+        audio.addEventListener('error', (e) => {
+            console.error('Audio error:', e);
+        });
+    </script>
+</body>
+</html>
