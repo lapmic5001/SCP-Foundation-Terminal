@@ -78,8 +78,8 @@
         // Define the correct username and password
         const correctCredentials = {
           drchrome: 'rgb-spectrum',
-          'fun-guy': 'hewo',
-          mOaR: '40958',
+          drrose: 'hewo',
+          drstreak: 'drstreak',
         };
 
         // Split the input by commas and trim whitespace
@@ -96,11 +96,11 @@
               drchrome: () => {
                 window.location.replace('assets/pages/chrome/chrome-home.html');
               },
-              'fun-guy': () => {
-                window.location.replace('https://example.com/fun-guy');
+              drrose: () => {
+                window.location.replace('assets/pages/rose/rose-home.html');
               },
-              mOaR: () => {
-                window.location.replace('https://example.com/mOaR');
+              drstreak: () => {
+                window.location.replace('assets/pages/streak/streak-home.html');
               },
             };
             actions[usernames[i]]();
